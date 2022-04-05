@@ -1,5 +1,6 @@
 import sqlite3
 import csv
+import os
 
 import click
 from flask import current_app, g
@@ -32,7 +33,8 @@ def init_db():
     with current_app.open_resource('db/schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
-    with current_app.open_resource('db/movies.csv', mode='r') as f:
+    csv_path = os.path.join(current_app.root_path, "db/movies.csv")
+    with open(csv_path, mode='r', encoding="utf-8") as f:
         dr = csv.DictReader(f)
         to_db = [
             (i['adult'], i['belongs_to_collection'], i['budget'], i['genres'], 
