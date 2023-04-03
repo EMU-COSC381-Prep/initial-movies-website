@@ -2,6 +2,8 @@
 .env
 .flaskenv
 *.pyc
+__pycache__/
+
 *.pyo
 env/
 venv/
